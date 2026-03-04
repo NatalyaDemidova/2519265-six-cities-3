@@ -10,3 +10,10 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const THEME_MAP = {
+  '/': 'page--gray page--main',
+  '/login': 'page--gray page--login',
+  '/favorites': ' ',
+  '/offer': ' ',
+};
