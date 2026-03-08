@@ -23,7 +23,7 @@ export default function App({
   placesCount,
   cardsCount,
 }: AppScreenProps): JSX.Element {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   return (
     <BrowserRouter>
       <Routes>
