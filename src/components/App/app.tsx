@@ -9,25 +9,30 @@ import PrivateRoute from '../privet-rout/privet-rout';
 import Layout from '../layout';
 import LayoutTools from '../layout-tools';
 import { useState } from 'react';
+import { CommentType, User } from '../../mosks/types/comment';
+import { UserType } from '../../mosks/types/user-type';
+import { OfferType } from '../../mosks/types/offer';
 
 type AppScreenProps = {
   placesCount: number;
   cardsCount: number;
+  user: User & UserType;
+  comments: CommentType[];
+  offers: OfferType[];
 };
-
-// type Authorization = {
-//   isAuth: boolean;
-// };
 
 export default function App({
   placesCount,
   cardsCount,
+  user,
+  comments,
+  offers
 }: AppScreenProps): JSX.Element {
   const [isAuth, setIsAuth] = useState(true);
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout isAuth={isAuth} />}>
+        <Route element={<Layout isAuth={isAuth} user={user} />}>
           <Route
             path={AppRoute.Main}
             element={

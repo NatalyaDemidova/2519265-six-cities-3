@@ -1,6 +1,7 @@
+import { User } from './types/comment';
 import { UserType } from './types/user-type';
 
-export const user: UserType = {
+export const user: User & UserType = {
   name: 'Oliver Conner',
   avatarUrl: 'img/avatar-max.jpg',
   isPro: false,
