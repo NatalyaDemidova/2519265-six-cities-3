@@ -1,13 +1,24 @@
-export default function Login():JSX.Element {
+import { Link } from 'react-router-dom';
+
+type LoginPageProps = {
+  setIsAuth: (value: boolean) => void;
+}
+
+export default function Login({setIsAuth}: LoginPageProps):JSX.Element {
+
+  const handleAuthStatus = () => {
+    setIsAuth(true);
+  };
+
   return (
     <div className="page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to="main.html">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -26,14 +37,14 @@ export default function Login():JSX.Element {
                 <label className="visually-hidden">Password</label>
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" required />
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={handleAuthStatus}>Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link className="locations__item-link" to="/">
                 <span>Amsterdam</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>
