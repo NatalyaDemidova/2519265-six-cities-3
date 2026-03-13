@@ -1,15 +1,11 @@
-// import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-// import Card from '../components/main/card';
 import OfferGallery from '../components/offer/offer-gallery';
 import OfferInside from '../components/offer/offer-inside';
 import OfferReviews from '../components/offer/offer-reviews';
-// import { offers } from '../mosks/offers';
 import { OfferType } from '../mosks/types/offer';
 import { getWidthForRating } from '../const';
 import { CommentType, User } from '../mosks/types/comment';
 import { UserType } from '../mosks/types/user-type';
-// import { OfferType } from '../mosks/types/offer';
 
 type OfferProps = {
   user: User & UserType;
@@ -20,22 +16,10 @@ type LocationStateOffer = {
   comments: CommentType[];
 }
 
-// function getOfferFromState(state: unknown): OfferType | CommentType {
-//   if (state && typeof state === 'object' && 'type' in state) {
-//     return state as OfferType;
-//   }
-//   return state as CommentType;
-// }
-
 export default function Offer({user}: OfferProps): JSX.Element {
-  // const [currentOffer, setOffer] = useState(offer);
   const location = useLocation();
   const cardData = location.state as LocationStateOffer;
   const {offer, comments} = cardData;
-  // const comments = location.state as OfferProps | null;
-
-  // console.log(offer)
-  // const comments
 
   return (
     <main className="page__main page__main--offer">

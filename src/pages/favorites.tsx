@@ -1,5 +1,4 @@
 import FavoritesList from '../components/favorites/favorites-list';
-// import { comments } from '../mosks/comments';
 import { CommentType } from '../mosks/types/comment';
 import { OfferType } from '../mosks/types/offer';
 

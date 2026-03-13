@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import LocationList from '../components/main/location-list';
 import MainWithPlaces from '../components/main/main-with-places';
-import { CommentType } from '../mosks/types/comment';
+import { CommentType, User } from '../mosks/types/comment';
 import { OfferType } from '../mosks/types/offer';
+import { UserType } from '../mosks/types/user-type';
 
 type MainScreenProps = {
   placesCount: number;
   // cardsCount: number;
   offers: OfferType[];
   comments: CommentType[];
+  user: User & UserType;
   // onHover: (evt: React.MouseEvent<HTMLElement>) => void;
 };
 
@@ -17,6 +19,7 @@ export default function MainPage({
   // cardsCount,
   offers,
   comments,
+  user,
   // onHover
 }: MainScreenProps): JSX.Element {
   const [,setCurrentElement] = useState<string | null>(null);
@@ -43,6 +46,7 @@ export default function MainPage({
           placesCount={placesCount}
           offers={offers}
           comments={comments}
+          user={user}
         />
       </div>
     </main>

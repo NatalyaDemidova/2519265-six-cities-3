@@ -7,7 +7,6 @@ import { offers } from './mosks/offers';
 
 export const Setting = {
   PlacesCount: 312,
-  CardsCount: 5,
 } as const;
 
 const root = ReactDOM.createRoot(
@@ -18,7 +17,6 @@ root.render(
   <React.StrictMode>
     <App
       placesCount={Setting.PlacesCount}
-      cardsCount={Setting.CardsCount}
       user={user}
       comments={comments}
       offers={offers}

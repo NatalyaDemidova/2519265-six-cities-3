@@ -29,7 +29,7 @@ export default function App({
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout user={user} />}>
+        <Route element={<Layout user={user}/>}>
           <Route
             path={AppRoute.Main}
             element={
@@ -37,6 +37,7 @@ export default function App({
                 placesCount={placesCount}
                 offers={offers}
                 comments={comments}
+                user={user}
               />
             }
           >

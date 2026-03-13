@@ -23,3 +23,7 @@ export const WIDTH_FOR_RATING: number = 20;
 export const MIN_RATING: number = 1;
 
 export const getWidthForRating = (rating: number) => (rating >= MIN_RATING) ? (rating * WIDTH_FOR_RATING) : 0;
+
+export enum DateFormat {
+  CommentDate = 'MMMM DD',
+}

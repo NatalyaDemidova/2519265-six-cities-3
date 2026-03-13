@@ -1,20 +1,21 @@
 import { Link } from 'react-router-dom';
 import { OfferType } from '../../mosks/types/offer';
 import { getWidthForRating } from '../../const';
-import { CommentType } from '../../mosks/types/comment';
+import { CommentType, User } from '../../mosks/types/comment';
+import { UserType } from '../../mosks/types/user-type';
 
 export type CardProps = {
   offer: OfferType;
   comments: CommentType[];
-  // onOffer: (offer:OfferType) => void;
+  user: User & UserType;
 }
 
-export default function Card({offer, comments}: CardProps): JSX.Element {
+export default function Card({offer, comments, user}: CardProps): JSX.Element {
   // const ratingWidth = (offer.rating >= MIN_RATING) ? (offer.rating * WIDTH_FOR_RATING) : 0;
   return (
     <article className="cities__card place-card" data-id={offer.id}>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/:${offer.id}`} state={{offer: offer, comments: comments}}>
+        <Link to={`/offer/:${offer.id}`} state={{offer: offer, comments: comments, user: user}}>
           <img
             className="place-card__image"
             src={offer.previewImage}

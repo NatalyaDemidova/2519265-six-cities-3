@@ -1,7 +1,9 @@
-import { getWidthForRating } from '../../const';
+import { DateFormat, getWidthForRating } from '../../const';
 import { CommentType } from '../../mosks/types/comment';
+import dayjs from 'dayjs';
 
-export type ReviewsItemProp = {
+
+type ReviewsItemProp = {
   comment: CommentType;
 };
 
@@ -36,7 +38,7 @@ export default function OfferReviewsItem({
           {comment.comment}
         </p>
         <time className="reviews__time" dateTime="2019-04-24">
-          April 2019
+          {dayjs(comment.date).format(DateFormat.CommentDate)}
         </time>
       </div>
     </li>

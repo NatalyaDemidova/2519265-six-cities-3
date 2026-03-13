@@ -1,6 +1,7 @@
 // import { ChangeEvent } from 'react';
-import { CommentType } from '../../mosks/types/comment';
+import { CommentType, User } from '../../mosks/types/comment';
 import { OfferType } from '../../mosks/types/offer';
+import { UserType } from '../../mosks/types/user-type';
 import Map from '../map';
 import Card from './card';
 import Sorting from './sorting';
@@ -10,8 +11,7 @@ type MainScreenProps = {
   // cardsCount: number;
   offers: OfferType[];
   comments: CommentType[];
-  // onMouseEnter: (evt: React.MouseEvent<HTMLDivElement>) => void;
-  // onHover: (evt: React.MouseEvent<HTMLDivElement>) => void;
+  user: User & UserType;
 };
 
 
@@ -20,8 +20,7 @@ export default function MainWithPlaces({
   // cardsCount,
   offers,
   comments,
-  // onMouseEnter,
-  // onHover,
+  user,
 }: MainScreenProps): JSX.Element {
   return (
     <div className="cities__places-container container">
@@ -35,7 +34,7 @@ export default function MainWithPlaces({
           className="cities__places-list places__list tabs__content"
         >
           {offers.map((offer) => (
-            <Card key={offer.id} offer={offer} comments={comments} />
+            <Card key={offer.id} offer={offer} comments={comments} user={user}/>
           ))}
         </div>
       </section>

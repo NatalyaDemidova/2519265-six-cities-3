@@ -1,7 +1,7 @@
 import { CommentType } from '../../mosks/types/comment';
 import OfferReviewsItem from './offer-review-item';
 
-export type ReviewsProps = {
+type ReviewsProps = {
   comments: CommentType[];
 }
 

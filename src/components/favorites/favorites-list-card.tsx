@@ -12,6 +12,7 @@ export default function FavoritesListCard({
   offer,
   comments
 }: FavoritesListCardProps): JSX.Element {
+  // console.log(comments)
   return (
     <article className="favorites__card place-card">
       {offer.isPremium && (
