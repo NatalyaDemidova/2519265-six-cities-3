@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
 import FavoritesListCard from './favorites-list-card';
 import { OfferForCardType } from '../../mosks/types/offer';
-import { CommentType } from '../../mosks/types/comment';
 
 export type FavoriteItemProps = {
   city: string;
   offers: OfferForCardType[];
-  comments: CommentType[];
 }
 
-export default function FavoritesListItem({city, offers, comments}: FavoriteItemProps): JSX.Element {
+export default function FavoritesListItem({city, offers}: FavoriteItemProps): JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -20,7 +18,7 @@ export default function FavoritesListItem({city, offers, comments}: FavoriteItem
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((offer) => <FavoritesListCard key={offer.id} offer={offer} comments={comments}/>)}
+        {offers.map((offer) => <FavoritesListCard key={offer.id} offer={offer} />)}
       </div>
     </li>
   );

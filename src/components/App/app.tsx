@@ -57,7 +57,6 @@ export default function App({
                 <PrivateRoute authorizationStatus={authorizationStatus}>
                   <FavoriteSection
                     offersCard={offersCard}
-                    comments={comments}
                   />
                 </PrivateRoute>
               }

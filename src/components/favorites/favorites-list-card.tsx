@@ -55,7 +55,7 @@ export default function FavoritesListCard({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/:${id}`} state={offer}>
+          <Link to={getOfferPath(id)}>
             {title}
           </Link>
         </h2>
