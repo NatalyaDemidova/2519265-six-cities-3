@@ -1,11 +1,15 @@
+import { User } from '../../mosks/types/comment';
+import { UserType } from '../../mosks/types/user-type';
 import Logo from '../logo';
 import HeaderNav from './header-nav';
 
 type Authorization = {
-  isAuth: boolean;
+  user: User & UserType;
+  favoritePlacesCount: number;
+  authorizationStatus: string;
 }
 
-export default function Header({isAuth}: Authorization): JSX.Element {
+export default function Header({user, favoritePlacesCount, authorizationStatus}: Authorization): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -13,7 +17,7 @@ export default function Header({isAuth}: Authorization): JSX.Element {
           <div className="header__left">
             <Logo />
           </div>
-          <HeaderNav isAuth={isAuth}/>
+          <HeaderNav user={user} favoritePlacesCount={favoritePlacesCount} authorizationStatus={authorizationStatus}/>
         </div>
       </div>
     </header>

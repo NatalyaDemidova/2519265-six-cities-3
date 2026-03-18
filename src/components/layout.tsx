@@ -1,14 +1,18 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { THEME_MAP } from '../const';
 import Header from './header/header';
+import { User } from '../mosks/types/comment';
+import { UserType } from '../mosks/types/user-type';
 
 type AppPath = '/login' | '/favorites' | '/offer' | '/';
 
 type Authorization = {
-  isAuth: boolean;
+  user: User & UserType;
+  favoritePlacesCount: number;
+  authorizationStatus: string;
 }
 
-export default function Layout({isAuth}: Authorization): JSX.Element {
+export default function Layout({user, favoritePlacesCount, authorizationStatus}: Authorization): JSX.Element {
   const { pathname } = useLocation();
 
   const getLayoutClass = (path: string): string =>
@@ -17,7 +21,7 @@ export default function Layout({isAuth}: Authorization): JSX.Element {
   const dynamicClass = getLayoutClass(pathname);
   return (
     <div className={`page ${dynamicClass}`}>
-      <Header isAuth={isAuth}/>
+      <Header user={user} favoritePlacesCount={favoritePlacesCount} authorizationStatus={authorizationStatus}/>
       <main className="page__main page__main--index">
         <Outlet />
       </main>

@@ -2,8 +2,10 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/:id',
+  Offer = '/offer',
 }
+
+export const getOfferPath = (id: string | number) =>`${AppRoute.Offer}/${id}`;
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -17,3 +19,19 @@ export const THEME_MAP = {
   '/favorites': ' ',
   '/offer': ' ',
 };
+
+
+export const WIDTH_FOR_RATING: number = 20;
+
+export const MIN_RATING: number = 1;
+
+export enum DateFormat {
+  CommentDate = 'MMMM DD',
+}
+
+export enum BookmarkClassName {
+  Offer = 'offer',
+  OfferActive = 'offer__bookmark-button button--active',
+  PlaceCard = 'place-card',
+  PlaceCardActive = 'place-card__bookmark-button--active',
+}

@@ -1,9 +1,16 @@
+import { CommentType } from '../../mosks/types/comment';
+import { sortByDate } from '../../utils';
 import OfferReviewsItem from './offer-review-item';
 
-export default function OfferReviewsList(): JSX.Element {
+type ReviewsProps = {
+  comments: CommentType[];
+}
+
+export default function OfferReviewsList({comments}: ReviewsProps): JSX.Element {
+  const sortedByDateComments = sortByDate(comments);
   return (
     <ul className="reviews__list">
-      <OfferReviewsItem />
+      {sortedByDateComments.map((comment) => <OfferReviewsItem key={comment.id} comment={comment}/>)}
     </ul>
   );
 }
