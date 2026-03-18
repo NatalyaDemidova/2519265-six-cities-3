@@ -9,7 +9,7 @@ export type CardProps = {
 };
 
 export default function Card({ offer, onHover }: CardProps): JSX.Element {
-  const { id, title, isFavorite } = offer;
+  const { id, title, isFavorite, type } = offer;
   return (
     <article className="cities__card place-card"
       onMouseEnter={() => onHover(id)}
@@ -56,7 +56,7 @@ export default function Card({ offer, onHover }: CardProps): JSX.Element {
             {title}
           </Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{type.charAt(0).toUpperCase() + type.slice(1)}</p>
       </div>
     </article>
   );

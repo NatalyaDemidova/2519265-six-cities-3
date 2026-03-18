@@ -45,10 +45,10 @@ export default function Offer({
             <div className="offer__name-wrapper">
               <h1 className="offer__name">{title}</h1>
               <button
-                className={`place-card__bookmark-button button ${isFavorite && BookmarkClassName.PlaceCardActive}`}
+                className={`offer__bookmark-button button ${isFavorite ? BookmarkClassName.PlaceCardActive : ''}`}
                 type="button"
               >
-                <svg className="place-card__bookmark-icon" width="31" height="33">
+                <svg className="offer__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark"></use>
                 </svg>
                 <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
@@ -69,12 +69,12 @@ export default function Offer({
               </span>
             </div>
             <ul className="offer__features">
-              <li className="offer__feature offer__feature--entire">{type}</li>
+              <li className="offer__feature offer__feature--entire">{type.charAt(0).toUpperCase() + type.slice(1)}</li>
               <li className="offer__feature offer__feature--bedrooms">
-                {bedrooms} Bedrooms
+                {bedrooms} {(bedrooms > 1) ? 'Bedrooms' : 'Bedroom'}
               </li>
               <li className="offer__feature offer__feature--adults">
-                Max {maxAdults} adults
+                Max {maxAdults} {(maxAdults > 1) ? 'adults' : 'adult'}
               </li>
             </ul>
             <div className="offer__price">
