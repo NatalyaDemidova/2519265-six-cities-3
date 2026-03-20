@@ -15,8 +15,8 @@ import Main from '../../pages/main';
 type AppScreenProps = {
   user: User & UserType;
   comments: CommentType[];
-  offers: OfferFullType[];
-  offersCard: OfferForCardType[];
+  offers: OfferFullType[] & OfferForCardType[];
+  // offersCard: OfferForCardType[];
   authorizationStatus: string;
 
 };
@@ -25,12 +25,13 @@ export default function App({
   user,
   comments,
   offers,
-  offersCard,
+  // offersCard,
   authorizationStatus,
 }: AppScreenProps) {
-  const favoritesPlaces = offersCard.filter(
+  const favoritesPlaces = offers.filter(
     ({ isFavorite }) => isFavorite === true,
   );
+
   const favoritePlacesCount = favoritesPlaces.length;
   return (
     <BrowserRouter>
@@ -46,7 +47,7 @@ export default function App({
         >
           <Route
             path={AppRoute.Main}
-            element={<Main offersCard={offersCard} />}
+            element={<Main offersCard={offers} />}
           >
           </Route>
           {/* 2 */}
@@ -56,7 +57,7 @@ export default function App({
               element={
                 <PrivateRoute authorizationStatus={authorizationStatus}>
                   <FavoriteSection
-                    offersCard={offersCard}
+                    offersCard={offers}
                   />
                 </PrivateRoute>
               }

@@ -1,6 +1,6 @@
-import { OfferFullType } from './types/offer';
+import { OfferForCardType, OfferFullType } from './types/offer';
 
-export const offers: OfferFullType[] = [
+export const offers: OfferFullType[] & OfferForCardType[] = [
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Beautiful & luxurious studio at great location',
@@ -9,14 +9,14 @@ export const offers: OfferFullType[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 9,
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 12,
       },
     },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     isFavorite: false,
@@ -33,6 +33,7 @@ export const offers: OfferFullType[] = [
     },
     images: ['img/apartment-01.jpg', 'img/apartment-03.jpg', 'img/apartment-02.jpg'],
     maxAdults: 2,
+    previewImage: 'img/apartment-01.jpg',
   },
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f55',
@@ -40,16 +41,16 @@ export const offers: OfferFullType[] = [
     type: 'hotel',
     price: 7500,
     city: {
-      name: 'Cologne',
+      name: 'Amsterdam',
       location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198,
         zoom: 8,
       },
     },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 3,
     },
     isFavorite: false,
@@ -66,6 +67,7 @@ export const offers: OfferFullType[] = [
     },
     images: ['img/apartment-01.jpg', 'img/apartment-03.jpg', 'img/apartment-02.jpg'],
     maxAdults: 1,
+    previewImage: 'img/apartment-01.jpg',
   },
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f66',
@@ -73,16 +75,16 @@ export const offers: OfferFullType[] = [
     type: 'apartment',
     price: 380,
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
         zoom: 8,
       },
     },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 8,
     },
     isFavorite: false,
@@ -99,6 +101,7 @@ export const offers: OfferFullType[] = [
     },
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg'],
     maxAdults: 4,
+    previewImage: 'img/apartment-01.jpg',
   },
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27760',
@@ -106,16 +109,16 @@ export const offers: OfferFullType[] = [
     type: 'room',
     price: 120,
     city: {
-      name: 'Hamburg',
+      name: 'Amsterdam',
       location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
+        latitude: 52.3809553943508,
+        longitude: 4.939309666406198,
         zoom: 8,
       },
     },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 8,
     },
     isFavorite: true,
@@ -132,5 +135,6 @@ export const offers: OfferFullType[] = [
     },
     images: ['img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-02.jpg'],
     maxAdults: 2,
+    previewImage: 'img/apartment-01.jpg',
   },
 ];
