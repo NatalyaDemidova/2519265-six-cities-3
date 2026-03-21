@@ -8,29 +8,34 @@ import Layout from '../layout';
 import LayoutTools from '../layout-tools';
 import { CommentType, User } from '../../mosks/types/comment';
 import { UserType } from '../../mosks/types/user-type';
-import { OfferForCardType, OfferFullType } from '../../mosks/types/offer';
+import { OfferForCardType, OfferFullType, OfferType } from '../../mosks/types/offer';
 import FavoriteSection from '../../pages/favorites/favorite-section';
 import Main from '../../pages/main';
 
 type AppScreenProps = {
   user: User & UserType;
   comments: CommentType[];
-  offers: OfferFullType[];
-  offersCard: OfferForCardType[];
+  offers: OfferType[];
   authorizationStatus: string;
-
 };
 
 export default function App({
   user,
   comments,
   offers,
-  offersCard,
   authorizationStatus,
 }: AppScreenProps) {
-  const favoritesPlaces = offersCard.filter(
+  const favoritesPlaces = offers.filter(
     ({ isFavorite }) => isFavorite === true,
   );
+
+  const isOfferForCard = (offer: OfferType): offer is OfferForCardType => 'previewImage' in offer && typeof offer.previewImage === 'string';
+  const isOfferForOffer = (offer: OfferType): offer is OfferFullType => 'description' in offer && typeof offer.description === 'string';
+
+
+  const offerForCard = offers.filter(isOfferForCard);
+  const offerForOffer = offers.filter(isOfferForOffer);
+
   const favoritePlacesCount = favoritesPlaces.length;
   return (
     <BrowserRouter>
@@ -46,7 +51,7 @@ export default function App({
         >
           <Route
             path={AppRoute.Main}
-            element={<Main offersCard={offersCard} />}
+            element={<Main offersCard={offerForCard} />}
           >
           </Route>
           {/* 2 */}
@@ -56,7 +61,7 @@ export default function App({
               element={
                 <PrivateRoute authorizationStatus={authorizationStatus}>
                   <FavoriteSection
-                    offersCard={offersCard}
+                    offersCard={offerForCard}
                   />
                 </PrivateRoute>
               }
@@ -68,7 +73,7 @@ export default function App({
             path={`${AppRoute.Offer}/:id`}
             element={
               <Offer
-                offers={offers}
+                offers={offerForOffer}
                 comments={comments}
                 authorizationStatus={authorizationStatus}
               />

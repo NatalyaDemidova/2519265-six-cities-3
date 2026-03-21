@@ -35,3 +35,9 @@ export enum BookmarkClassName {
   PlaceCard = 'place-card',
   PlaceCardActive = 'place-card__bookmark-button--active',
 }
+
+export enum Markers {
+  URL_MARKER_DEFAULT = '/markup/img/pin.svg',
+  URL_MARKER_CURRENT = '/markup/img/pin-active.svg',
+}
+

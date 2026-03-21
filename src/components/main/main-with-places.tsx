@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { OfferForCardType } from '../../mosks/types/offer';
-import Map from '../map';
+import Map from '../map/map';
 import Card from './card';
 import Sorting from './sorting';
 
@@ -8,10 +8,12 @@ type MainScreenProps = {
   offersCard: OfferForCardType[];
 };
 
+const CITY = 'Amsterdam';
+
 export default function MainWithPlaces({
   offersCard,
 }: MainScreenProps): JSX.Element {
-  const [, setCurrentCard] = useState<string | null>(null);
+  const [currentCardId, setCurrentCardId] = useState<string | null>(null);
 
   return (
     <div className="cities__places-container container">
@@ -23,16 +25,12 @@ export default function MainWithPlaces({
         <Sorting />
         <div className="cities__places-list places__list tabs__content">
           {offersCard.map((offer) => (
-            <Card
-              key={offer.id}
-              offer={offer}
-              onHover={setCurrentCard}
-            />
+            <Card key={offer.id} offer={offer} onHover={setCurrentCardId} />
           ))}
         </div>
       </section>
       <div className="cities__right-section">
-        <Map />
+        <Map offersCard={offersCard} city={CITY} currentCardId={currentCardId} />
       </div>
     </div>
   );
