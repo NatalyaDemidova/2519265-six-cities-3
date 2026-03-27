@@ -13,7 +13,7 @@ export const CITIES_LIST = [
     location: {
       latitude: 53.5507553943508,
       longitude: 9.993309666406198,
-      zoom: 12,
+      zoom: 11,
     },
   },
   {
@@ -21,7 +21,7 @@ export const CITIES_LIST = [
     location: {
       latitude: 52.3809553943508,
       longitude: 4.939309666406198,
-      zoom: 12,
+      zoom: 11,
     },
   },
 ];

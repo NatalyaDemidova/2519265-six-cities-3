@@ -48,7 +48,7 @@ export const DEFAULT_CITY: CityType = {
   location: {
     latitude: 52.3809553943508,
     longitude: 4.939309666406198,
-    zoom: 12,
+    zoom: 11,
   },
 };
 

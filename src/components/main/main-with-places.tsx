@@ -16,6 +16,7 @@ export default function MainWithPlaces({
   city
 }: MainScreenProps): JSX.Element {
   const [currentCardId, setCurrentCardId] = useState<string | null>(null);
+  const [sorting, setSorting] = useState(false);
 
   if(!city) {
     city = DEFAULT_CITY;
@@ -28,7 +29,7 @@ export default function MainWithPlaces({
         <b className="places__found">
           {offersCard.length} places to stay in {city.name}
         </b>
-        <Sorting />
+        <Sorting sorting={sorting} onClick={setSorting} />
         <div className="cities__places-list places__list tabs__content">
           {offersCard.map((offer) => (
             <Card key={offer.id} offer={offer} onHover={setCurrentCardId} />

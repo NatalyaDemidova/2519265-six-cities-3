@@ -151,8 +151,8 @@ export const offers: OfferFullType[] | OfferForCardType[] = [
       },
     },
     location: {
-      latitude: 53.5507553943508,
-      longitude: 9.99309666406198,
+      latitude: 53.5507453943508,
+      longitude: 9.99302666406198,
       zoom: 12,
     },
     isFavorite: false,
@@ -185,8 +185,8 @@ export const offers: OfferFullType[] | OfferForCardType[] = [
       },
     },
     location: {
-      latitude: 53.5507553943508,
-      longitude: 9.99309666406198,
+      latitude: 53.5507253943508,
+      longitude: 9.99301666406198,
       zoom: 12,
     },
     isFavorite: false,
@@ -219,8 +219,8 @@ export const offers: OfferFullType[] | OfferForCardType[] = [
       },
     },
     location: {
-      latitude: 53.5507553943508,
-      longitude: 9.993009666406198,
+      latitude: 53.5507953943508,
+      longitude: 9.993019665406198,
       zoom: 12,
     },
     isFavorite: false,
@@ -253,7 +253,7 @@ export const offers: OfferFullType[] | OfferForCardType[] = [
       },
     },
     location: {
-      latitude: 53.5507553943508,
+      latitude: 53.5507553843508,
       longitude: 9.993309666406198,
       zoom: 12,
     },
