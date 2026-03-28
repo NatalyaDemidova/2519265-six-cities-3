@@ -116,7 +116,6 @@ export default function Offer({
             <OfferReviews comments={comments} authorizationStatus={authorizationStatus} />
           </div>
         </div>
-        {/* <section className="offer__map map"></section> */}
         <Map offersCard={offersCard} city={city} currentCardId={offerId} className='offer__map map' />
       </section>
       <div className="container">
@@ -125,9 +124,6 @@ export default function Offer({
             Other places in the neighbourhood
           </h2>
           <div className="near-places__list places__list">
-            {/* <Card />
-            <Card />
-            <Card /> */}
             {offersCard.map((offer) => <Card key={offer.id} offer={offer} />)}
           </div>
         </section>
