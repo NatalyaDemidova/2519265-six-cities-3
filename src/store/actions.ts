@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { OfferForCardType } from '../mosks/types/offer';
-import { AuthorizationStatus, SortType } from '../const';
+import { AppRoute, AuthorizationStatus, SortType } from '../const';
 
 export const setCity = createAction<string>('city/setCity');
 
@@ -22,3 +22,5 @@ export const requireAutorization = createAction<AuthorizationStatus>('user/requi
 export const setErrors = createAction<string | null>('offers/setErrors');
 
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
+
+export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');

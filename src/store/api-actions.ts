@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../mosks/types/state';
 import { AxiosInstance } from 'axios';
-import { APIRout, AuthorizationStatus, TIME_OUT_SHOW_ERROR } from '../const';
-import { loadOffers, requireAutorization, setErrors, setOffersDataLoadingStatus } from './actions';
+import { APIRout, AppRoute, AuthorizationStatus, TIME_OUT_SHOW_ERROR } from '../const';
+import { loadOffers, redirectToRoute, requireAutorization, setErrors, setOffersDataLoadingStatus } from './actions';
 import { OfferForCardType } from '../mosks/types/offer';
 import { AuthDataType } from '../mosks/types/auth-data';
 import { dropToken, setToken } from '../services/token';
@@ -58,6 +58,7 @@ export const loginUser = createAsyncThunk<void, AuthDataType, {
     const {data: {token}} = await api.post<UserDataType>(APIRout.Login, {email, password});
     setToken(token);
     dispatch(requireAutorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
   }
 );
 
