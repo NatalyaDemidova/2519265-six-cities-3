@@ -8,19 +8,16 @@ import Layout from '../layout';
 import LayoutTools from '../layout-tools';
 import FavoriteSection from '../../pages/favorites/favorite-section';
 import Main from '../../pages/main';
-import { isOfferForCard, isOfferForOffer } from '../../utils';
 import { useAppSelector } from '../../hooks';
 import Loader from '../loader/loader';
 import { user } from '../../mosks/user';
-import { offersMock } from '../../mosks/offers';
-import { comments } from '../../mosks/comments';
 import HistoryRouter from '../history-route/history-route';
 import { browserHistory } from '../../browser-history';
 
 export default function App() {
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isLoadingOffers = useAppSelector((state) => state.isOffersLosdingStatus);
+  const isLoadingOffers = useAppSelector((state) => state.isOffersLoadingStatus);
   const offers = useAppSelector((state) => state.offers);
 
   if(authorizationStatus === AuthorizationStatus.Unknown || isLoadingOffers) {
@@ -30,9 +27,6 @@ export default function App() {
   const favoritesPlaces = offers.filter(
     ({ isFavorite }) => isFavorite === true,
   );
-
-  const offersForCard = offers.filter(isOfferForCard);
-  const offersForOffer = offersMock.filter(isOfferForOffer);
 
   const favoritePlacesCount = favoritesPlaces.length;
   return (
@@ -68,12 +62,7 @@ export default function App() {
           <Route
             path={`${AppRoute.Offer}/:id`}
             element={
-              <Offer
-                offers={offersForOffer}
-                offersForCards={offersForCard}
-                comments={comments}
-                authorizationStatus={authorizationStatus}
-              />
+              <Offer />
             }
           >
           </Route>
