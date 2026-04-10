@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import Map from '../map/map';
 import {Card} from './card';
 import {Sorting} from './sorting';
@@ -18,10 +18,14 @@ export const MainWithPlaces = memo(({offersOfCity, city}: MainWithPlacesProps): 
 
   const dispatch = useAppDispatch();
 
-  const handleFavoriteClick = (data: {id: string; status: boolean}) => {
+  const handleFavoriteClick = useCallback((data: {id: string; status: boolean}) => {
     dispatch(toggleFavoriteOffer(data));
-  };
+  }, [dispatch]);
   const [currentCardId, setCurrentCardId] = useState<string | null>(null);
+
+  const handleCardHover = useCallback((id: string | null) => {
+    setCurrentCardId(id);
+  }, []);
 
   const cityName = useAppSelector(getCity);
   const sortType = useAppSelector(getActiveSortType);
@@ -38,7 +42,7 @@ export const MainWithPlaces = memo(({offersOfCity, city}: MainWithPlacesProps): 
         <Sorting />
         <div className="cities__places-list places__list tabs__content">
           {offersCards.map((offer) => (
-            <Card key={offer.id} offer={offer} onClick={handleFavoriteClick} onHover={setCurrentCardId} />
+            <Card key={offer.id} offer={offer} onClick={handleFavoriteClick} onHover={handleCardHover} />
           ))}
         </div>
       </section>
