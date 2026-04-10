@@ -48,7 +48,7 @@ export default function App() {
               path={AppRoute.Favorites}
               element={
                 <PrivateRoute >
-                  <FavoriteSection favoritesOffers={favoritesOffers} />
+                  <FavoriteSection />
                 </PrivateRoute>
               }
             >
