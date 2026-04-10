@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import Map from '../map/map';
-import Card from './card';
-import Sorting from './sorting';
+import {Card} from './card';
+import {Sorting} from './sorting';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getActiveSortType, getCity } from '../../store/offers/selectors';
 import { toggleFavoriteOffer } from '../../store/api-actions';
@@ -14,7 +14,7 @@ type MainWithPlacesProps = {
   city: CityType;
 }
 
-export default function MainWithPlaces({offersOfCity, city}: MainWithPlacesProps): JSX.Element {
+export const MainWithPlaces = memo(({offersOfCity, city}: MainWithPlacesProps): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
@@ -47,4 +47,6 @@ export default function MainWithPlaces({offersOfCity, city}: MainWithPlacesProps
       </div>
     </div>
   );
-}
+});
+
+MainWithPlaces.displayName = 'MainWithPlaces';

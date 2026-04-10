@@ -1,15 +1,16 @@
+import { memo } from 'react';
 import { CITIES_NAME } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { setCity } from '../../store/offers/offers-process';
-import LocationItem from './location-item';
+import {LocationItem} from './location-item';
 
 type LocationListProps = {
   activeCity: string;
 };
 
-export default function LocationList({
+export const LocationList = memo(({
   activeCity,
-}: LocationListProps): JSX.Element {
+}: LocationListProps): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
@@ -28,4 +29,6 @@ export default function LocationList({
       </ul>
     </section>
   );
-}
+});
+
+LocationList.displayName = 'LocationList';

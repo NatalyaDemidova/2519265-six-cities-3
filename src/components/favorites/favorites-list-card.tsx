@@ -2,16 +2,17 @@ import { Link } from 'react-router-dom';
 import { OfferForCardType } from '../../types/offer';
 import { AppRoute, BookmarkClassName} from '../../const';
 import { getWidthForRating } from '../../utils';
+import { memo } from 'react';
 
 export type FavoritesListCardProps = {
   offer: OfferForCardType;
   clickHandler: (data: {id: string; status: boolean}) => void;
 };
 
-export default function FavoritesListCard({
+export const FavoritesListCard = memo(({
   offer,
   clickHandler,
-}: FavoritesListCardProps): JSX.Element {
+}: FavoritesListCardProps): JSX.Element => {
   const { id, price, isPremium, isFavorite, rating, title, type, previewImage } = offer;
   return (
     <article className="favorites__card place-card">
@@ -64,4 +65,6 @@ export default function FavoritesListCard({
       </div>
     </article>
   );
-}
+});
+
+FavoritesListCard.displayName = 'FavoritesListCard';

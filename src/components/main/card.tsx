@@ -4,6 +4,7 @@ import { AppRoute, AuthorizationStatus, BookmarkClassName } from '../../const';
 import { getWidthForRating } from '../../utils';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { memo } from 'react';
 
 export type CardProps = {
   offer: OfferForCardType;
@@ -11,7 +12,7 @@ export type CardProps = {
   onHover?: (id: string | null) => void;
 };
 
-export default function Card({ offer, onClick, onHover }: CardProps): JSX.Element {
+export const Card = memo(({ offer, onClick, onHover }: CardProps): JSX.Element => {
 
   const {id, title, isFavorite, isPremium, type } = offer;
   const auth = useAppSelector(getAuthorizationStatus);
@@ -72,4 +73,7 @@ export default function Card({ offer, onClick, onHover }: CardProps): JSX.Elemen
       </div>
     </article>
   );
-}
+});
+
+Card.displayName = 'Card';
+

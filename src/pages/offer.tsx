@@ -5,14 +5,14 @@ import { AppRoute, BookmarkClassName } from '../const';
 import OfferReviews from '../components/offer/offer-reviews';
 import { getWidthForRating } from '../utils';
 import Map from '../components/map/map';
-import Card from '../components/main/card';
+import {Card} from '../components/main/card';
 import {
   fetchCommentsActions,
   fetchOfferActions,
   fetchOffersNearbyActions,
   toggleFavoriteOffer,
 } from '../store/api-actions';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getIsOffersLoadingStatus, getOffers } from '../store/offers/selectors';
 import {
@@ -23,7 +23,7 @@ import {
 } from '../store/offer/selectors';
 import { getAuthorizationStatus } from '../store/user-process/selectors';
 
-export default function Offer(): JSX.Element | null {
+export const Offer = memo((): JSX.Element | null => {
   const { id } = useParams<{ id: string }>();
 
   const dispatch = useAppDispatch();
@@ -189,4 +189,6 @@ export default function Offer(): JSX.Element | null {
       </div>
     </main>
   );
-}
+});
+
+Offer.displayName = 'Offer';

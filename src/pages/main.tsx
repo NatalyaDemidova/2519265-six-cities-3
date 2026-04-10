@@ -1,6 +1,6 @@
 import { ErrorUploadData } from '../components/errors/error-upload-data';
-import LocationList from '../components/main/location-list';
-import MainWithPlaces from '../components/main/main-with-places';
+import {LocationList} from '../components/main/location-list';
+import {MainWithPlaces} from '../components/main/main-with-places';
 import MainWithoutPlaces from '../components/main/main-without-places';
 import { useAppSelector } from '../hooks';
 import { getCity, getOffers, getOffersError } from '../store/offers/selectors';

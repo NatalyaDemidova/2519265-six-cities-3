@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Login from '../../pages/login';
-import Offer from '../../pages/offer';
+import {Offer} from '../../pages/offer';
 import NotFound from '../not-found/notFound';
 import PrivateRoute from '../privet-rout/privet-rout';
 import Layout from '../layout';
