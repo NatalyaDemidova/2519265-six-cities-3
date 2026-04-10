@@ -14,10 +14,11 @@ export type UserProcessType = {
 export type OffersProcessType = {
   offers: OfferForCardType [];
   city: string;
-  offersOfCity: OfferForCardType[];
+  // offersOfCity: OfferForCardType[];
   activeSortType: SortType;
-  favoritesOffers: OfferForCardType[] | [];
+  favoritesOffers: OfferForCardType[];
   isOffersLoadingStatus: boolean;
+  hasError: boolean;
 }
 
 export type OfferProcessType = {

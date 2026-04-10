@@ -1,12 +1,10 @@
-import { OfferForCardType } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
+import { getFavoritesOffers } from '../../store/offers/selectors';
 import Favorites from './favorites';
 import FavoritesEmpty from './favorites-empty';
 
-type FavoritesSectionProp = {
-  favoritesOffers: OfferForCardType [];
-}
-
-export default function FavoritesSection({favoritesOffers}: FavoritesSectionProp) {
+export default function FavoritesSection() {
+  const favoritesOffers = useAppSelector(getFavoritesOffers);
 
   const isFavoriteOffers: boolean = favoritesOffers.length > 0;
   return (

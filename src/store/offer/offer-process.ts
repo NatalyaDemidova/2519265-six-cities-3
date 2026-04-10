@@ -1,9 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { OfferFullType } from '../../types/offer';
-import { NAME_SPACE } from '../../const';
-// import { loadOffer } from '../actions';
+import { NameSpace } from '../../const';
 import { OfferProcessType } from '../../types/state';
-import { fetchCommentsActions, fetchOfferActions, fetchOffersNearbyActions, postReview } from '../api-actions';
+import { fetchCommentsActions, fetchOfferActions, fetchOffersNearbyActions, postReview, toggleFavoriteOffer } from '../api-actions';
 
 const initialState: OfferProcessType = {
   offer: null,
@@ -13,7 +11,7 @@ const initialState: OfferProcessType = {
 };
 
 export const offerProcess = createSlice({
-  name: NAME_SPACE.Offer,
+  name: NameSpace.Offer,
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -30,6 +28,16 @@ export const offerProcess = createSlice({
       })
       .addCase(fetchOffersNearbyActions.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
+      })
+      .addCase(toggleFavoriteOffer.fulfilled, (state, action) => {
+        const currentOffer = action.payload;
+        if(currentOffer.id === state.offer?.id) {
+          state.offer.isFavorite = currentOffer.isFavorite;
+        }
+        const offerOfList = state.offersNearby.find((offer) => offer.id === currentOffer.id);
+        if(offerOfList) {
+          offerOfList.isFavorite = currentOffer.isFavorite;
+        }
       })
       .addCase(postReview.fulfilled, (state, action) => {
         state.comments.push(action.payload);

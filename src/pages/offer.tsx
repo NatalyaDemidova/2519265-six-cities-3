@@ -10,6 +10,7 @@ import {
   fetchCommentsActions,
   fetchOfferActions,
   fetchOffersNearbyActions,
+  toggleFavoriteOffer,
 } from '../store/api-actions';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -36,6 +37,7 @@ export default function Offer(): JSX.Element | null {
   const isError = useAppSelector(getHasError);
   const navigate = useNavigate();
 
+  // console.log(offersNearby)
   useEffect(() => {
     if (id && !isOfferLoadingStatus && currentOffer?.id !== id) {
       dispatch(fetchOfferActions(id));
@@ -70,6 +72,10 @@ export default function Offer(): JSX.Element | null {
     city,
   } = currentOffer;
 
+  const handleFavoriteClick = (data: {id: string; status: boolean}) => {
+    dispatch(toggleFavoriteOffer(data));
+  };
+
   const offersCard = offersNearby
     .filter((offer) => offer.city.name === city.name && offer.id !== id)
     .slice(0, 3);
@@ -92,8 +98,9 @@ export default function Offer(): JSX.Element | null {
               <button
                 className={`offer__bookmark-button button ${isFavorite ? BookmarkClassName.PlaceCardActive : ''}`}
                 type="button"
+                onClick={() => handleFavoriteClick({id: currentOffer.id, status: !isFavorite})}
               >
-                <svg className="offer__bookmark-icon" width="31" height="33">
+                <svg className="offer__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark"></use>
                 </svg>
                 <span className="visually-hidden">
@@ -176,7 +183,7 @@ export default function Offer(): JSX.Element | null {
           </h2>
           <div className="near-places__list places__list">
             {offersCard.map((offer) => (
-              <Card key={offer.id} offer={offer} />
+              <Card key={offer.id} offer={offer} onClick={handleFavoriteClick} />
             ))}
           </div>
         </section>

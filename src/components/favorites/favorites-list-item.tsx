@@ -8,9 +8,10 @@ import { setCity } from '../../store/offers/offers-process';
 export type FavoriteItemProps = {
   city: string;
   offers: OfferForCardType[];
+  clickHandler: (data: {id: string; status: boolean}) => void;
 }
 
-export default function FavoritesListItem({city, offers}: FavoriteItemProps): JSX.Element {
+export default function FavoritesListItem({city, offers, clickHandler}: FavoriteItemProps): JSX.Element {
   const dispatch = useAppDispatch();
   return (
     <li className="favorites__locations-items">
@@ -22,7 +23,7 @@ export default function FavoritesListItem({city, offers}: FavoriteItemProps): JS
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((offer) => <FavoritesListCard key={offer.id} offer={offer} />)}
+        {offers.map((offer) => <FavoritesListCard key={offer.id} offer={offer} clickHandler={clickHandler} />)}
       </div>
     </li>
   );

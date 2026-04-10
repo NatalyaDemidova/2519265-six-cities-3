@@ -56,7 +56,7 @@ export enum APIRoute {
   Offer = '/offer',
   Comments = '/comments',
   offersNearby = '/nearby',
-  Favorites = '/favorites',
+  Favorites = '/favorite',
 }
 
 export const TIME_OUT_SHOW_ERROR = 2000;
@@ -67,7 +67,7 @@ export const MIN_LENGHT_COMMENT = 50;
 
 export const MIN_RATING_COMMENT = 0;
 
-export enum NAME_SPACE {
+export enum NameSpace {
   User = 'USER',
   Offer = 'OFFER',
   Offers = 'OFFERS',

@@ -3,7 +3,7 @@ import { OfferForCardType } from '../../types/offer';
 
 export type FavoritesProps = {
   offersCard: OfferForCardType[];
-}
+};
 
 export default function Favorites({offersCard}: FavoritesProps): JSX.Element {
   return (
@@ -11,7 +11,7 @@ export default function Favorites({offersCard}: FavoritesProps): JSX.Element {
       <div className="page__favorites-container container">
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
-          <FavoritesList offersCard={offersCard}/>
+          <FavoritesList offersCard={offersCard} />
         </section>
       </div>
     </main>

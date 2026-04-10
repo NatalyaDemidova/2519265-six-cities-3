@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserProcessType } from '../../types/state';
-import { AuthorizationStatus, NAME_SPACE } from '../../const';
+import { AuthorizationStatus, NameSpace } from '../../const';
 import { checkAuthActions, clearErrorsAction, loginUser, logoutUser } from '../api-actions';
 
 const initialState: UserProcessType = {
@@ -10,7 +10,7 @@ const initialState: UserProcessType = {
 };
 
 export const userProcess = createSlice({
-  name: NAME_SPACE.User,
+  name: NameSpace.User,
   initialState,
   reducers: {
     setErrors:(state, action: PayloadAction<string>) => {

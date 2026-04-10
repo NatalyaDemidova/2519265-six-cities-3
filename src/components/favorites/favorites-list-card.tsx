@@ -5,12 +5,14 @@ import { getWidthForRating } from '../../utils';
 
 export type FavoritesListCardProps = {
   offer: OfferForCardType;
+  clickHandler: (data: {id: string; status: boolean}) => void;
 };
 
 export default function FavoritesListCard({
   offer,
+  clickHandler,
 }: FavoritesListCardProps): JSX.Element {
-  const { id, price, isPremium, isFavorite, rating, title, type } = offer;
+  const { id, price, isPremium, isFavorite, rating, title, type, previewImage } = offer;
   return (
     <article className="favorites__card place-card">
       {isPremium && (
@@ -23,7 +25,7 @@ export default function FavoritesListCard({
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
-            src="img/apartment-small-03.jpg"
+            src={previewImage}
             width="150"
             height="110"
             alt="Place image"
@@ -39,6 +41,7 @@ export default function FavoritesListCard({
           <button
             className={`place-card__bookmark-button button ${BookmarkClassName.PlaceCardActive}`}
             type="button"
+            onClick={() => clickHandler({id, status: !isFavorite})}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>

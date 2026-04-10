@@ -43,9 +43,22 @@ export const fetchOfferActions = createAsyncThunk<
   return data;
 });
 
+export const toggleFavoriteOffer = createAsyncThunk<
+OfferFullType,
+{id: string; status: boolean},
+{
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('offer/toggleOffer', async ({id, status}, {extra: api}) => {
+  const { data } = await api.post<OfferFullType>(`${APIRoute.Favorites}/${id}/${status ? 1 : 0}`, status);
+  return data;
+});
+
 export const fetchFavoriteOfferActions = createAsyncThunk<
   OfferForCardType[],
-  string,
+  undefined,
   {
     dispatch: AppDispatch;
     state: State;

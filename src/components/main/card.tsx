@@ -1,16 +1,21 @@
 import { Link } from 'react-router-dom';
 import { OfferForCardType } from '../../types/offer';
-import { AppRoute, BookmarkClassName } from '../../const';
+import { AppRoute, AuthorizationStatus, BookmarkClassName } from '../../const';
 import { getWidthForRating } from '../../utils';
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 export type CardProps = {
   offer: OfferForCardType;
+  onClick: (data: {id: string; status: boolean}) => void;
   onHover?: (id: string | null) => void;
 };
 
-export default function Card({ offer, onHover }: CardProps): JSX.Element {
+export default function Card({ offer, onClick, onHover }: CardProps): JSX.Element {
 
   const {id, title, isFavorite, type } = offer;
+  const auth = useAppSelector(getAuthorizationStatus);
+
   return (
     <article className="cities__card place-card"
       onMouseEnter={() => onHover?.(id)}
@@ -36,6 +41,8 @@ export default function Card({ offer, onHover }: CardProps): JSX.Element {
           <button
             className={`place-card__bookmark-button button ${isFavorite && BookmarkClassName.PlaceCardActive}`}
             type="button"
+            onClick={() => onClick({id, status: !isFavorite})}
+            title={auth === AuthorizationStatus.NoAuth ? 'Log in to add to favorites' : undefined}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>

@@ -1,17 +1,32 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Map from '../map/map';
 import Card from './card';
 import Sorting from './sorting';
-import { useAppSelector } from '../../hooks';
-import { getCity, getOffersOfCity } from '../../store/offers/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getActiveSortType, getCity } from '../../store/offers/selectors';
+import { toggleFavoriteOffer } from '../../store/api-actions';
+import { sortingMap } from '../../store/actions';
+import { OfferForCardType } from '../../types/offer';
+import { CityType } from '../../types/city';
 
-export default function MainWithPlaces(): JSX.Element {
+type MainWithPlacesProps = {
+  offersOfCity: OfferForCardType[];
+  city: CityType;
+}
+
+export default function MainWithPlaces({offersOfCity, city}: MainWithPlacesProps): JSX.Element {
+
+  const dispatch = useAppDispatch();
+
+  const handleFavoriteClick = (data: {id: string; status: boolean}) => {
+    dispatch(toggleFavoriteOffer(data));
+  };
   const [currentCardId, setCurrentCardId] = useState<string | null>(null);
 
-  const offersCards = useAppSelector(getOffersOfCity);
   const cityName = useAppSelector(getCity);
+  const sortType = useAppSelector(getActiveSortType);
 
-  const city = offersCards[0].city;
+  const offersCards = useMemo(()=> sortingMap[sortType](offersOfCity), [offersOfCity, sortType]);
 
   return (
     <div className="cities__places-container container">
@@ -23,7 +38,7 @@ export default function MainWithPlaces(): JSX.Element {
         <Sorting />
         <div className="cities__places-list places__list tabs__content">
           {offersCards.map((offer) => (
-            <Card key={offer.id} offer={offer} onHover={setCurrentCardId} />
+            <Card key={offer.id} offer={offer} onClick={handleFavoriteClick} onHover={setCurrentCardId} />
           ))}
         </div>
       </section>
