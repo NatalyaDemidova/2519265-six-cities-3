@@ -1,20 +1,13 @@
-import {
-  FormEvent,
-  Fragment,
-  // ReactEventHandler,
-  useRef,
-  useState,
-  // useState,
-} from 'react';
-import { ReviewDataType } from '../../mosks/types/review-data-type';
+import { FormEvent, Fragment, memo, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReview } from '../../store/api-actions';
-import { MIN_LENGHT_COMMENT, MIN_RATING_COMMENT } from '../../const';
-// import { useAppDispatch } from '../../hooks';
-
-// type ChangeHandlerType = ReactEventHandler<
-//   HTMLInputElement | HTMLTextAreaElement
-// >;
+import {
+  MAX_LENGHT_COMMENT,
+  MIN_LENGHT_COMMENT,
+  MIN_RATING_COMMENT,
+} from '../../const';
+import { getHasError, getOffer } from '../../store/offer/selectors';
+import { useParams } from 'react-router-dom';
 
 const ratingStars = [
   { value: 5, label: 'perfect' },
@@ -24,41 +17,68 @@ const ratingStars = [
   { value: 1, label: 'terribly' },
 ];
 
-export default function OfferForm() {
+export const OfferForm = memo(() => {
+  const { id } = useParams();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.offer);
+  const offer = useAppSelector(getOffer);
+  const hasError = useAppSelector(getHasError);
 
-  const onSubmit = (data: ReviewDataType) => {
-    if(offer?.id) {
-      dispatch(postReview({data: data, id: offer.id}));
-    }
-  };
-
-  // const ratingRef = useRef<HTMLInputElement | null>(null);
   const reviewRef = useRef<HTMLTextAreaElement | null>(null);
 
   const [newComment, setNewComment] = useState<number>(0);
   const [newRating, setNewRating] = useState<string>('0');
+  const [isFormDisabled, setIsFormDisabled] = useState<boolean>(false);
+  const [sendingError, setSendingError] = useState(false);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (reviewRef.current !== null) {
-      onSubmit({
-        // rating: Number(ratingRef.current.value),
-        rating: Number(newRating),
-        comment: reviewRef.current.value,
-      });
-      // ratingRef.current.value = '';
-      setNewRating('0');
-      reviewRef.current.value = '';
-    }
+
+    setIsFormDisabled(true);
+    setSendingError(false);
+    const sendReview = async () => {
+      if (reviewRef.current !== null && Number(newRating) !== 0 && offer?.id) {
+        try {
+          await dispatch(
+            postReview({
+              data: {
+                rating: Number(newRating),
+                comment: reviewRef.current.value,
+              },
+              id: offer.id,
+            })
+          ).unwrap();
+
+          setNewRating('0');
+          if (reviewRef.current) {
+            reviewRef.current.value = '';
+          }
+        } catch {
+          setSendingError(true);
+        } finally {
+          setIsFormDisabled(false);
+        }
+      }
+    };
+
+    sendReview();
   };
 
-  const isDesabled = Number(newComment) <= MIN_LENGHT_COMMENT || Number(newRating) === MIN_RATING_COMMENT;
+  const isDisabled =
+    Number(newComment) < MIN_LENGHT_COMMENT ||
+    Number(newRating) === MIN_RATING_COMMENT ||
+    Number(newComment) > MAX_LENGHT_COMMENT;
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -72,8 +92,8 @@ export default function OfferForm() {
               id={`${value}-stars`}
               type="radio"
               checked={newRating === String(value)}
-              // ref={ratingRef}
               onChange={() => setNewRating(String(value))}
+              disabled={isFormDisabled}
             />
             <label
               htmlFor={`${value}-stars`}
@@ -94,8 +114,11 @@ export default function OfferForm() {
         placeholder="Tell how was your stay, what you like and what can be improved"
         ref={reviewRef}
         onChange={() => setNewComment(reviewRef.current?.value.length ?? 0)}
+        disabled={isFormDisabled}
       >
       </textarea>
+      {(hasError || sendingError) && <span style={{color: 'red'}}>Sending error</span>}
+
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}
@@ -105,11 +128,13 @@ export default function OfferForm() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={isDesabled}
+          disabled={isDisabled || isFormDisabled}
         >
           Submit
         </button>
       </div>
     </form>
   );
-}
+});
+
+OfferForm.displayName = 'OfferForm';

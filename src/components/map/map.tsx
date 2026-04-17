@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react';
 import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from './use-map';
-import { OfferForCardType } from '../../mosks/types/offer';
+import { OfferForCardType } from '../../types/offer';
 import { Markers } from '../../const';
-import { CityType } from '../../mosks/types/city';
+import { CityType } from '../../types/city';
 
 type MapProps = {
   offersCards: OfferForCardType[];
@@ -49,7 +49,8 @@ export default function Map({
   }, [city, map]);
 
   useEffect(() => {
-    if (map) {
+    if (map && markerLayer.current) {
+      markerLayer.current.clearLayers();
       offersOfCurrentCity.forEach((point) => {
         leaflet
           .marker(

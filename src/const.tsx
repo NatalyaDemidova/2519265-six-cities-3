@@ -6,7 +6,7 @@ export enum AppRoute {
   NotFound = '*',
 }
 
-// export const getOfferPath = (id: string | number) =>`${AppRoute.Offer}/${id}`;
+export const getOfferPath = (id: string | number) =>`${AppRoute.Offer}/${id}`;
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -27,12 +27,12 @@ export const WIDTH_FOR_RATING: number = 20;
 export const MIN_RATING: number = 1;
 
 export enum DateFormat {
-  CommentDate = 'MMMM DD',
+  CommentDate = 'MMMM YYYY',
 }
 
 export enum BookmarkClassName {
   Offer = 'offer',
-  OfferActive = 'offer__bookmark-button button--active',
+  OfferActive = 'offer__bookmark-button--active',
   PlaceCard = 'place-card',
   PlaceCardActive = 'place-card__bookmark-button--active',
 }
@@ -56,6 +56,7 @@ export enum APIRoute {
   Offer = '/offer',
   Comments = '/comments',
   offersNearby = '/nearby',
+  Favorites = '/favorite',
 }
 
 export const TIME_OUT_SHOW_ERROR = 2000;
@@ -66,4 +67,29 @@ export const MIN_LENGHT_COMMENT = 50;
 
 export const MIN_RATING_COMMENT = 0;
 
+export enum NameSpace {
+  User = 'USER',
+  Offer = 'OFFER',
+  Offers = 'OFFERS',
+}
 
+export const CITIES_NAME: string[] = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
+
+export enum ClassNameForCard {
+  Offer = 'near-places__card',
+  Main = 'cities__card'
+}
+
+export enum ClassNameForMain {
+  Main = 'main',
+  Login = 'login',
+  Favorites = 'favorites',
+  Offer = 'offer',
+}

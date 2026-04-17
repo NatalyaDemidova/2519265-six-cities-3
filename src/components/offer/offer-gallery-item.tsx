@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
 type OfferGalleryItemProps = {
   image: string;
 }
 
-export default function OfferGalleryItem({image}: OfferGalleryItemProps): JSX.Element {
-  return (
+export const OfferGalleryItem = memo(({image}: OfferGalleryItemProps): JSX.Element =>
+  (
     <div className="offer__image-wrapper">
       <img
         className="offer__image"
@@ -11,5 +13,6 @@ export default function OfferGalleryItem({image}: OfferGalleryItemProps): JSX.El
         alt="Photo studio"
       />
     </div>
-  );
-}
+  ));
+
+OfferGalleryItem.displayName = 'OfferGalleryItem';

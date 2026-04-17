@@ -1,15 +1,19 @@
-import OfferGalleryItem from './offer-gallery-item';
+import { memo } from 'react';
+import {OfferGalleryItem} from './offer-gallery-item';
 
 type OfferGalleryProps = {
   images: string[];
 }
 
-export default function OfferGallery({images}: OfferGalleryProps): JSX.Element {
+export const OfferGallery = memo(({images}: OfferGalleryProps): JSX.Element => {
+  const imagesForRendering = images.slice(0, 6);
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
-        {images.map((image) => <OfferGalleryItem key={image} image={image}/>)}
+        {imagesForRendering.map((image) => <OfferGalleryItem key={image} image={image}/>)}
       </div>
     </div>
   );
-}
+});
+
+OfferGallery.displayName = 'OfferGallery';
