@@ -1,10 +1,11 @@
-import OfferGalleryItem from './offer-gallery-item';
+import { memo } from 'react';
+import {OfferGalleryItem} from './offer-gallery-item';
 
 type OfferGalleryProps = {
   images: string[];
 }
 
-export default function OfferGallery({images}: OfferGalleryProps): JSX.Element {
+export const OfferGallery = memo(({images}: OfferGalleryProps): JSX.Element => {
   const imagesForRendering = images.slice(0, 6);
   return (
     <div className="offer__gallery-container container">
@@ -13,4 +14,6 @@ export default function OfferGallery({images}: OfferGalleryProps): JSX.Element {
       </div>
     </div>
   );
-}
+});
+
+OfferGallery.displayName = 'OfferGallery';

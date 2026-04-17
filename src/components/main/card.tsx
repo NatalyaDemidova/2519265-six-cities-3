@@ -54,7 +54,7 @@ export const Card = memo(({ offer, onClick, onHover, className }: CardProps): JS
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button button ${isFavorite && BookmarkClassName.PlaceCardActive}`}
+            className={`place-card__bookmark-button button ${isFavorite ? BookmarkClassName.PlaceCardActive : ''}`}
             type="button"
             onClick={handleFavoriteClick}
           >

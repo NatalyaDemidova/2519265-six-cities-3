@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import OfferGallery from '../components/offer/offer-gallery';
-import OfferInside from '../components/offer/offer-inside';
+import {OfferGallery} from '../components/offer/offer-gallery';
+import {OfferInside} from '../components/offer/offer-inside';
 import { AppRoute, AuthorizationStatus, BookmarkClassName, ClassNameForCard } from '../const';
-import OfferReviews from '../components/offer/offer-reviews';
+import {OfferReviews} from '../components/offer/offer-reviews';
 import { getWidthForRating } from '../utils';
 import Map from '../components/map/map';
 import {Card} from '../components/main/card';
@@ -55,6 +55,8 @@ export const Offer = memo((): JSX.Element | null => {
     return null;
   }
 
+  console.log(offersNearby)
+
   const {
     title,
     rating,
@@ -81,7 +83,7 @@ export const Offer = memo((): JSX.Element | null => {
   };
 
   const offersCard = offersNearby
-    .filter((offer) => offer.id !== id)
+    .filter((offer) => offer.city.name === city.name && offer.id !== id)
     .slice(0, 3);
 
   const currentOfferForCard = offersForCards.find((offer) => offer.id === id);
@@ -158,7 +160,7 @@ export const Offer = memo((): JSX.Element | null => {
                   />
                 </div>
                 <span className="offer__user-name">{name}</span>
-                {isPro ? '<span className="offer__user-status">Pro</span>' : ''}
+                {isPro ? <span className="offer__user-status">Pro</span> : ''}
               </div>
               <div className="offer__description">
                 <p className="offer__text">{description}</p>

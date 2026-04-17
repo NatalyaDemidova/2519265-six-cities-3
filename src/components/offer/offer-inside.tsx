@@ -1,8 +1,10 @@
+import { memo } from 'react';
+
 type OfferInsideProps = {
   goods: string[];
 }
 
-export default function OfferInside({goods}: OfferInsideProps): JSX.Element {
+export const OfferInside = memo(({goods}: OfferInsideProps): JSX.Element => {
   const listElements = goods.map((good) => <li key={good} className="offer__inside-item">{good}</li>);
   return (
     <div className="offer__inside">
@@ -12,6 +14,6 @@ export default function OfferInside({goods}: OfferInsideProps): JSX.Element {
       </ul>
     </div>
   );
-}
+});
 
-
+OfferInside.displayName = 'OfferInside';

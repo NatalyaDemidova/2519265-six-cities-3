@@ -6,7 +6,7 @@ import NotFound from '../not-found/notFound';
 import PrivateRoute from '../privet-rout/privet-rout';
 import Layout from '../layout';
 import LayoutTools from '../layout-tools';
-import FavoriteSection from '../../pages/favorites/favorite-section';
+import {FavoriteSection} from '../../pages/favorites/favorite-section';
 import Main from '../../pages/main';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Loader from '../loader/loader';

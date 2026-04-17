@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../../hooks';
 import { toggleFavoriteOffer } from '../../store/api-actions';
 import { OfferForCardType } from '../../types/offer';
-import FavoritesListItem from './favorites-list-item';
+import {FavoritesListItem} from './favorites-list-item';
 
 export type FavoritesListProps = {
   offersCard: OfferForCardType[];

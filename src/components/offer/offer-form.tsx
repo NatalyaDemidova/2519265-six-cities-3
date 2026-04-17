@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, useRef, useState } from 'react';
+import { FormEvent, Fragment, memo, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReview } from '../../store/api-actions';
 import {
@@ -6,7 +6,8 @@ import {
   MIN_LENGHT_COMMENT,
   MIN_RATING_COMMENT,
 } from '../../const';
-import { getOffer } from '../../store/offer/selectors';
+import { getHasError, getOffer } from '../../store/offer/selectors';
+import { useParams } from 'react-router-dom';
 
 const ratingStars = [
   { value: 5, label: 'perfect' },
@@ -16,20 +17,28 @@ const ratingStars = [
   { value: 1, label: 'terribly' },
 ];
 
-export default function OfferForm() {
+export const OfferForm = memo(() => {
+  const { id } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
   const dispatch = useAppDispatch();
   const offer = useAppSelector(getOffer);
+  const hasError = useAppSelector(getHasError);
 
   const reviewRef = useRef<HTMLTextAreaElement | null>(null);
 
   const [newComment, setNewComment] = useState<number>(0);
   const [newRating, setNewRating] = useState<string>('0');
   const [isFormDisabled, setIsFormDisabled] = useState<boolean>(false);
+  const [sendingError, setSendingError] = useState(false);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     setIsFormDisabled(true);
+    setSendingError(false);
     const sendReview = async () => {
       if (reviewRef.current !== null && Number(newRating) !== 0 && offer?.id) {
         try {
@@ -47,9 +56,8 @@ export default function OfferForm() {
           if (reviewRef.current) {
             reviewRef.current.value = '';
           }
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.log('ошибка отправки');
+        } catch {
+          setSendingError(true);
         } finally {
           setIsFormDisabled(false);
         }
@@ -109,6 +117,8 @@ export default function OfferForm() {
         disabled={isFormDisabled}
       >
       </textarea>
+      {(hasError || sendingError) && <span style={{color: 'red'}}>Sending error</span>}
+
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}
@@ -125,4 +135,6 @@ export default function OfferForm() {
       </div>
     </form>
   );
-}
+});
+
+OfferForm.displayName = 'OfferForm';

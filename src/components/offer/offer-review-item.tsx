@@ -2,16 +2,17 @@ import { DateFormat } from '../../const';
 import { CommentType } from '../../types/comment';
 import dayjs from 'dayjs';
 import { getWidthForRating } from '../../utils';
+import { memo } from 'react';
 
 
 type ReviewsItemProp = {
   comment: CommentType;
 };
 
-export default function OfferReviewsItem({
+export const OfferReviewsItem = memo(({
   comment,
-}: ReviewsItemProp): JSX.Element {
-  return (
+}: ReviewsItemProp): JSX.Element =>
+  (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
@@ -43,5 +44,6 @@ export default function OfferReviewsItem({
         </time>
       </div>
     </li>
-  );
-}
+  ));
+
+OfferReviewsItem.displayName = 'OfferReviewsItem';

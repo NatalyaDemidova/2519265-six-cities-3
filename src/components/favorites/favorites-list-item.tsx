@@ -3,6 +3,7 @@ import {FavoritesListCard} from './favorites-list-card';
 import { OfferForCardType } from '../../types/offer';
 import { useAppDispatch } from '../../hooks';
 import { setCity } from '../../store/offers/offers-process';
+import { memo } from 'react';
 
 export type FavoriteItemProps = {
   city: string;
@@ -10,7 +11,7 @@ export type FavoriteItemProps = {
   clickHandler: (data: {id: string; status: boolean}) => void;
 }
 
-export default function FavoritesListItem({city, offers, clickHandler}: FavoriteItemProps): JSX.Element {
+export const FavoritesListItem = memo(({city, offers, clickHandler}: FavoriteItemProps): JSX.Element => {
   const dispatch = useAppDispatch();
   return (
     <li className="favorites__locations-items">
@@ -26,4 +27,6 @@ export default function FavoritesListItem({city, offers, clickHandler}: Favorite
       </div>
     </li>
   );
-}
+});
+
+FavoritesListItem.displayName = 'FavoritesListItem';

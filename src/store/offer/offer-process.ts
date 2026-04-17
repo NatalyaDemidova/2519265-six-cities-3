@@ -46,6 +46,9 @@ export const offerProcess = createSlice({
       })
       .addCase(postReview.pending, (state) => {
         state.isCommentLoading = true;
+      })
+      .addCase(postReview.rejected, (state) => {
+        state.isCommentLoading = false;
       });
   },
 });

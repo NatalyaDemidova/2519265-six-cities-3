@@ -1,14 +1,15 @@
+import { memo } from 'react';
 import { CommentType } from '../../types/comment';
-import OfferForm from './offer-form';
-import OfferReviewsList from './offer-review-list';
+import {OfferForm} from './offer-form';
+import {OfferReviewsList} from './offer-review-list';
 
 export type ReviewsProps = {
   comments: CommentType[];
   authorizationStatus: string;
 }
 
-export default function OfferReviews({comments, authorizationStatus}: ReviewsProps) {
-  return (
+export const OfferReviews = memo(({comments, authorizationStatus}: ReviewsProps) =>
+  (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
         Reviews &middot; <span className="reviews__amount">{comments.length}</span>
@@ -16,5 +17,6 @@ export default function OfferReviews({comments, authorizationStatus}: ReviewsPro
       <OfferReviewsList comments={comments} />
       {(authorizationStatus === 'AUTH') && <OfferForm />}
     </section>
-  );
-}
+  ));
+
+OfferReviews.displayName = 'OfferReviews';
